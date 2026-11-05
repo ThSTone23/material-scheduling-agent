@@ -1,0 +1,15 @@
+test_confirmed_alternative_can_be_saved (test_agent.SchedulingAgentTests.test_confirmed_alternative_can_be_saved) ... ok
+test_conflict_offers_alternative_and_requires_confirmation (test_agent.SchedulingAgentTests.test_conflict_offers_alternative_and_requires_confirmation) ... ok
+test_duplicate_request_creates_one_draft (test_agent.SchedulingAgentTests.test_duplicate_request_creates_one_draft) ... ok
+test_missing_metadata_is_blocked_before_slot_query (test_agent.SchedulingAgentTests.test_missing_metadata_is_blocked_before_slot_query) ... ok
+test_normal_material_creates_a_draft_never_publication (test_agent.SchedulingAgentTests.test_normal_material_creates_a_draft_never_publication) ... ok
+test_rule_risk_is_blocked (test_agent.SchedulingAgentTests.test_rule_risk_is_blocked) ... ok
+test_save_failure_is_exposed (test_agent.SchedulingAgentTests.test_save_failure_is_exposed) ... ok
+test_step_limit_returns_explicit_incomplete (test_agent.SchedulingAgentTests.test_step_limit_returns_explicit_incomplete) ... ok
+test_unknown_material_is_blocked_after_reading_result (test_agent.SchedulingAgentTests.test_unknown_material_is_blocked_after_reading_result) ... ok
+test_unsafe_model_save_action_is_blocked_before_any_save (test_agent.SchedulingAgentTests.test_unsafe_model_save_action_is_blocked_before_any_save) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.037s
+
+OK

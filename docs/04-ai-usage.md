@@ -7,4 +7,4 @@
 - 增加离线确定性适配器，使评审在没有 API 密钥时仍可运行全部测试；并明确它不是模型判断效果的证明。
 - 以 CLI JSON Trace 作为可复现材料，而不是以截图代替代码和结果。
 
-验证方式为运行 `unittest` 覆盖全部强制验收点，并由 CLI 产生 `examples/` 中的实际输出。真实密钥不进入仓库，配置仅通过 `.env.example` 说明。
+验证方式为运行 `unittest` 覆盖全部强制验收点（实际结果在 `examples/test-results.txt`），并由 CLI 产生 `examples/` 中的实际输出。另以真实 `mimo-v2.6-flash` 运行正常和冲突两条路径，输出与 Trace 分别保存在 `examples/outputs/online_*.json` 和 `examples/traces/online_*.json`。真实密钥不进入仓库，配置仅通过 `.env.example` 说明。

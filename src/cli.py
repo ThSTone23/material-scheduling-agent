@@ -24,8 +24,10 @@ def main() -> int:
     rendered = json.dumps(result, ensure_ascii=False, indent=2)
     print(rendered)
     if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered + "\n", encoding="utf-8")
     if args.trace_output:
+        args.trace_output.parent.mkdir(parents=True, exist_ok=True)
         args.trace_output.write_text(json.dumps(result["trace"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return 0 if result["status"] in {"draft_saved", "needs_confirmation", "blocked", "save_failed", "incomplete"} else 1
 

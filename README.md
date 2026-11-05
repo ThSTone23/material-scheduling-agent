@@ -31,6 +31,8 @@ python -m src.cli --request examples/inputs/conflict.json --mode openai
 
 `OPENAI_BASE_URL` 默认为 `https://api.openai.com/v1`，因此也可指向实现 Responses API 的兼容服务。在线模式中模型每步只能选择白名单动作；本地策略层仍会阻止越权改期和发布。详见 [docs/02-solution.md](docs/02-solution.md)。
 
+已提交两条真实模型运行记录：[`online_normal.json`](examples/outputs/online_normal.json) 展示可用时段后的保存草稿；[`online_conflict.json`](examples/outputs/online_conflict.json) 展示已占用时段后的待确认。两者的逐步工具记录位于 `examples/traces/`。
+
 ## 评审入口
 
 - 需求与验收：[`docs/01-requirements.md`](docs/01-requirements.md)

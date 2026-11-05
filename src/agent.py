@@ -122,7 +122,30 @@ class SchedulingAgent:
 
     @staticmethod
     def _public_state(state: dict[str, Any]) -> dict[str, Any]:
-        return {k: v for k, v in state.items() if k != "save_result" or v is not None}
+        public = {k: v for k, v in state.items() if k != "save_result" or v is not None}
+        public["allowed_actions"] = SchedulingAgent._allowed_actions(state)
+        return public
+
+    @staticmethod
+    def _allowed_actions(state: dict[str, Any]) -> list[str]:
+        """A workflow skeleton; the model still decides from tool-returned business state."""
+        if not state.get("material_read"):
+            return ["read_material", "block"]
+        if not state.get("material_result", {}).get("found"):
+            return ["block"]
+        if not state.get("rule_result"):
+            return ["check_rules", "block"]
+        rules = state["rule_result"]
+        if not rules.get("passed"):
+            return ["block"]
+        if not state.get("slot_result"):
+            return ["query_slots", "block"]
+        slots = state["slot_result"]
+        if not slots["available"] and not state["request"].get("confirm_alternative"):
+            return ["request_confirmation", "block"]
+        if not state.get("save_result"):
+            return ["save_draft", "block"]
+        return ["finish"]
 
     @staticmethod
     def _event(step: int, tool: str, params: dict[str, Any], summary: dict[str, Any], next_action: str, reason: str) -> dict[str, Any]:

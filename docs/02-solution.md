@@ -10,11 +10,15 @@
 
 动作白名单为 `read_material`、`check_rules`、`query_slots`、`save_draft`、`request_confirmation`、`block` 和 `finish`。每一次工具返回后，下一轮将包含已有的可见状态，因此模型能基于真实工具结果改变动作。比如 `conflict.json` 中，`query_slots` 返回 18:00 已占用、19:00 可用，下一动作变为 `request_confirmation`；而 `normal.json` 中查询结果可用，下一动作变为 `save_draft`。
 
+执行骨架还会把当前阶段可选的 `allowed_actions` 传给模型，并在本地复核前置条件。这不会替模型伪造工具结果或最终决策理由；它避免模型跳过“读取 → 审核 → 查时段”等必要业务阶段。分支仍由模型观察工具结果后决定：真实 MiMo 记录中，时段可用时模型选择 `save_draft`，时段冲突且未确认时模型选择 `request_confirmation`。证据见 `examples/traces/online_normal.json` 与 `examples/traces/online_conflict.json`。
+
 ## 模式和取舍
 
 `--mode openai` 通过标准库向 `POST {OPENAI_BASE_URL}/responses` 发起 Responses API 请求，要求模型只返回 `{"action":"...","reason":"..."}`。模型并不直接调用本地函数：Agent 收到动作后调用工具，并把摘要传给下一轮。这使 Trace 可审计并方便替换 API 服务。官方 Python SDK 也将 Responses API 作为主要文本接口；本项目为了零依赖离线评审，使用等价 HTTP 调用。[官方 Python API 文档](https://developers.openai.com/api/reference/python)
 
 `--mode offline` 是确定性替身，覆盖相同的动作契约，目的是让测试和证据可重复。它不能证明真实模型会作出同等判断，也不应被称为真实 LLM ReAct 的效果证据。
+
+实际在线验证使用 `mimo-v2.6-flash`，通过小米 MiMo 的 OpenAI 兼容 Responses 接口运行；Base URL、模型名和密钥均从环境变量读取，密钥没有存入仓库。模型服务宣称兼容 OpenAI/Anthropic 协议，并给出 OpenAI 兼容 Base URL；本项目已用该配置产生上述两条实际 Trace。[MiMo-V2.6-Flash 官方说明](https://mimo.mi.com/models/en-US/mimo-v2.6-flash)
 
 没有引入 LangGraph 等编排框架：本题只有一个有上限、状态很小的工具循环，显式循环更容易审阅。框架不是能力边界；替换 `DecisionActor` 即可接入框架或其他模型。
 

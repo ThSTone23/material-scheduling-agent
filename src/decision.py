@@ -52,6 +52,7 @@ class OpenAIResponsesActor:
         instructions = (
             "You are a scheduling decision maker. Return ONLY JSON with action and reason. "
             f"action must be one of {list(ACTION_NAMES)}. Decide the next action from the supplied state. "
+            "The state contains allowed_actions. You MUST choose one of those actions and must not skip a workflow stage. "
             "Never select publication. If a requested hard slot is occupied and no confirmation exists, "
             "select request_confirmation rather than save_draft. Block missing metadata or rule violations."
         )
