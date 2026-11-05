@@ -1,6 +1,6 @@
 # 素材审核与发布排期 Agent
 
-一个可离线运行、也可由 OpenAI 兼容模型驱动的 CLI Agent。它审核素材、查询时段并**只保存排期草稿**；它不会发布内容。
+一个可离线运行、支持兼容 Responses 接口在线决策的 CLI Agent。它审核素材、查询时段并**只保存排期草稿**；它不会发布内容。
 
 ## 快速开始
 
@@ -25,11 +25,12 @@ python -m src.cli --request examples/inputs/conflict.json --mode offline --outpu
 
 ```powershell
 $env:OPENAI_API_KEY = "..."
-$env:OPENAI_MODEL = "gpt-5.5"
+$env:OPENAI_MODEL = "mimo-v2.6-flash"
+$env:OPENAI_BASE_URL = "https://api.xiaomimimo.com/v1"
 python -m src.cli --request examples/inputs/conflict.json --mode openai
 ```
 
-`OPENAI_BASE_URL` 默认为 `https://api.openai.com/v1`，因此也可指向实现 Responses API 的兼容服务。在线模式中模型每步只能选择白名单动作；本地策略层仍会阻止越权改期和发布。详见 [docs/02-solution.md](docs/02-solution.md)。
+`OPENAI_BASE_URL` 可指向实现 Responses API 的兼容服务。在线模式中每步只能选择白名单动作；本地策略层仍会阻止越权改期和发布。详见 [docs/02-solution.md](docs/02-solution.md)。
 
 已提交两条真实模型运行记录：[`online_normal.json`](examples/outputs/online_normal.json) 展示可用时段后的保存草稿；[`online_conflict.json`](examples/outputs/online_conflict.json) 展示已占用时段后的待确认。两者的逐步工具记录位于 `examples/traces/`。
 

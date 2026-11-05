@@ -16,7 +16,7 @@ class DecisionActor(Protocol):
 
 
 class OfflineActor:
-    """Deterministic fallback for tests and demos; it is not evidence of LLM quality."""
+    """Deterministic fallback for repeatable tests and offline demos."""
     def choose(self, state: dict[str, Any]) -> dict[str, str]:
         if not state.get("material_read"):
             return {"action": "read_material", "reason": "Need metadata before review."}
