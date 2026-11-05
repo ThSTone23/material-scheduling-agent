@@ -1,0 +1,61 @@
+[
+  {
+    "step": 1,
+    "tool": "read_material",
+    "parameters": {
+      "material_id": "M01"
+    },
+    "result_summary": {
+      "found": true
+    },
+    "next_action": "next_model_action",
+    "decision_basis": "Need metadata before review."
+  },
+  {
+    "step": 2,
+    "tool": "check_rules",
+    "parameters": {
+      "material_id": "M01"
+    },
+    "result_summary": {
+      "passed": true,
+      "missing_fields": [],
+      "violations": [],
+      "risk_level": "none"
+    },
+    "next_action": "next_model_action",
+    "decision_basis": "Need rule evidence before scheduling."
+  },
+  {
+    "step": 3,
+    "tool": "query_slots",
+    "parameters": {
+      "desired_slot": "2026-11-06T18:00"
+    },
+    "result_summary": {
+      "available": false,
+      "occupant": "existing-campaign",
+      "alternatives": [
+        "2026-11-06T19:00",
+        "2026-11-06T20:00"
+      ]
+    },
+    "next_action": "next_model_action",
+    "decision_basis": "Material passed; check requested time."
+  },
+  {
+    "step": 4,
+    "tool": "request_confirmation",
+    "parameters": {
+      "requested_slot": "2026-11-06T18:00"
+    },
+    "result_summary": {
+      "alternatives": [
+        "2026-11-06T19:00",
+        "2026-11-06T20:00"
+      ]
+    },
+    "next_action": "return_pending_confirmation",
+    "decision_basis": "Requested hard time is occupied; an alternative needs user confirmation."
+  }
+]

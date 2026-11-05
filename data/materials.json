@@ -1,0 +1,9 @@
+{
+  "materials": [
+    {"id": "M01", "title": "秋日剪辑技巧", "caption": "三分钟学会转场", "tags": ["教程"], "rights_status": "cleared"},
+    {"id": "M02", "title": "未完成素材", "caption": "", "tags": ["教程"], "rights_status": "cleared"},
+    {"id": "M03", "title": "夸大宣传", "caption": "保证一夜暴富", "tags": ["营销"], "rights_status": "cleared"},
+    {"id": "M04", "title": "周末灵感", "caption": "分享创作灵感", "tags": ["灵感"], "rights_status": "cleared"},
+    {"id": "M05", "title": "存储故障演示", "caption": "用于验证保存失败", "tags": ["测试"], "rights_status": "cleared", "simulate_save_failure": true}
+  ]
+}

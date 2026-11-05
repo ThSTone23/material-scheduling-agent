@@ -1,0 +1,4 @@
+{
+  "required_fields": ["title", "caption", "rights_status"],
+  "forbidden_terms": ["一夜暴富", "保证收益"]
+}

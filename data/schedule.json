@@ -1,0 +1,7 @@
+{
+  "slots": [
+    {"time": "2026-11-06T18:00", "status": "occupied", "occupant": "existing-campaign"},
+    {"time": "2026-11-06T19:00", "status": "available"},
+    {"time": "2026-11-06T20:00", "status": "available"}
+  ]
+}

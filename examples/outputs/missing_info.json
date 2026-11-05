@@ -1,0 +1,58 @@
+{
+  "request_id": "req-missing-001",
+  "material_id": "M02",
+  "status": "blocked",
+  "review_status": "BLOCKED",
+  "risk_reasons": [
+    "missing:caption"
+  ],
+  "suggested_slot": null,
+  "pending_confirmation": false,
+  "draft_save": {
+    "status": "not_attempted"
+  },
+  "trace": [
+    {
+      "step": 1,
+      "tool": "read_material",
+      "parameters": {
+        "material_id": "M02"
+      },
+      "result_summary": {
+        "found": true
+      },
+      "next_action": "next_model_action",
+      "decision_basis": "Need metadata before review."
+    },
+    {
+      "step": 2,
+      "tool": "check_rules",
+      "parameters": {
+        "material_id": "M02"
+      },
+      "result_summary": {
+        "passed": false,
+        "missing_fields": [
+          "caption"
+        ],
+        "violations": [],
+        "risk_level": "medium"
+      },
+      "next_action": "next_model_action",
+      "decision_basis": "Need rule evidence before scheduling."
+    },
+    {
+      "step": 3,
+      "tool": "block",
+      "parameters": {},
+      "result_summary": {
+        "risk_reasons": [
+          "missing:caption"
+        ]
+      },
+      "next_action": "return_blocked",
+      "decision_basis": "Required metadata is missing."
+    }
+  ],
+  "published": false
+}
